@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
-from PyQt5 import QtCore, QtGui, QtWidgets
 import os
-from addvm_ui import Ui_addVM
+import subprocess
+
+from PyQt5 import QtWidgets
+
+from .addvm_ui import Ui_addVM
+from .util import saveConfig
+
 
 class addVMC(Ui_addVM):
     def setupWin(self, addVM, datadict):
@@ -18,7 +23,6 @@ class addVMC(Ui_addVM):
         self.browseImport.setEnabled(self.importCheckbox.isChecked())
 
     def browseImportClick(self):
-        import platform
         browse = QtWidgets.QFileDialog()
         browse.setFileMode(QtWidgets.QFileDialog.Directory)
         browse.setOption(QtWidgets.QFileDialog.ShowDirsOnly)
@@ -55,11 +59,9 @@ class addVMC(Ui_addVM):
             if not('VMList' in self.datadict.keys()):
                 self.datadict['VMList'] = {}
             self.datadict['VMList'][name] = (description,path)
-            from util import saveConfig
             saveConfig(self.datadict)
             if self.configureCheck.isChecked():
                 if '86BoxPath' in self.datadict.keys():
-                    import subprocess
                     ops = []
                     ops.append(self.datadict['86BoxPath'])
                     if 'RomOverride' in self.datadict.keys():

@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from edit_ui import Ui_editVM
-import sys
-from util import errorBox, saveConfig
+import subprocess
+import os
+from PyQt5 import QtWidgets
+from .edit_ui import Ui_editVM
+from .util import errorBox, saveConfig
 
 
 class editVMiW(Ui_editVM):
@@ -28,7 +29,6 @@ class editVMiW(Ui_editVM):
         self.changed = True
 
     def editButtonClicked(self):
-        import os
         if self.changed:
             newName = self.vmName.text()
             newDesc = self.vmDescription.text()
@@ -41,7 +41,6 @@ class editVMiW(Ui_editVM):
                     saveConfig(self.datadict)
                     if self.configureCheck.isChecked():
                         if '86BoxPath' in self.datadict.keys():
-                            import subprocess
                             ops = []
                             ops.append(self.datadict['86BoxPath'])
                             if 'RomOverride' in self.datadict.keys():

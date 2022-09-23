@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from PyQt5 import QtCore, QtGui, QtWidgets
 import os
-from util import saveConfig
-from settings_ui import Ui_settingsWindow
+import platform
+
+from PyQt5 import QtWidgets
+
+from .settings_ui import Ui_settingsWindow
+from .util import saveConfig
 
 
 class settingsWindow(Ui_settingsWindow):
@@ -46,7 +49,6 @@ class settingsWindow(Ui_settingsWindow):
         self.browseRoms.setEnabled(self.romCheck.isChecked())
 
     def browse86boxClick(self):
-        import platform
         browse = QtWidgets.QFileDialog()
         browse.setFileMode(QtWidgets.QFileDialog.ExistingFile)
         if platform.system() == "Windows":
@@ -59,7 +61,6 @@ class settingsWindow(Ui_settingsWindow):
                     self.lineEdit.setText(filename[0])
 
     def selectButtonDir(self,textbox):
-        import platform
         browse = QtWidgets.QFileDialog()
         browse.setFileMode(QtWidgets.QFileDialog.Directory)
         browse.setOption(QtWidgets.QFileDialog.ShowDirsOnly)
@@ -70,7 +71,6 @@ class settingsWindow(Ui_settingsWindow):
                     textbox.setText(filename[0])
 
     def validateConfig(self,window):
-        import pickle
         error = False
         if not os.path.exists(self.lineEdit.text()):
             error = True

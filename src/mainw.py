@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from PyQt5 import QtCore, QtGui, QtWidgets, QtNetwork, Qt
-from addvm import addVMC
-from settings import settingsWindow
+import os
+import shutil
 import subprocess
-from main_ui import Ui_MainWindow
-from edit import editVMiW
+
+from PyQt5 import QtCore, QtNetwork, QtWidgets
+
+from .addvm import addVMC
+from .edit import editVMiW
+from .main_ui import Ui_MainWindow
+from .settings import settingsWindow
+from .util import saveConfig
+
 
 class MainWin(Ui_MainWindow):
     def setupWin(self, MainWindow,datadict):
@@ -82,14 +88,12 @@ class MainWin(Ui_MainWindow):
 
 
     def socketConnect(self,name):
-        import time
         print("Socket connected:"+name)
         self.runningVM[name]['client'] = self.runningVM[name]['server'].nextPendingConnection()
         print(self.runningVM[name]['client'])
         self.runningVM[name]['client'].disconnected.connect(self.runningVM[name]['client'].deleteLater)
 
     def addButtonfunc(self, datadict):
-        import os
         if not(os.path.exists(datadict['86BoxPath'])):
             self.errorBox(self.window,'Invalid 86Box path','Please review the settings and define a 86Box path')
             return
@@ -138,12 +142,9 @@ class MainWin(Ui_MainWindow):
             name = items[0].text()
             if name not in self.runningVM.keys():
                 desc,path = self.datadict['VMList'][name]
-                import shutil
-                import os
                 ignore = self.datadict['VMList'].pop(name)
                 if os.path.exists(path):
                     shutil.rmtree(path)
-                from util import saveConfig
                 saveConfig(self.datadict)
 
     def settingsButtonClicked(self, datadict):
@@ -160,7 +161,6 @@ class MainWin(Ui_MainWindow):
             if name not in self.runningVM.keys():
                 desc,path = self.datadict['VMList'][name]
                 if '86BoxPath' in self.datadict.keys():
-                    import subprocess
                     ops = []
                     ops.append(self.datadict['86BoxPath'])
                     if 'RomOverride' in self.datadict.keys():
@@ -176,14 +176,12 @@ class MainWin(Ui_MainWindow):
                     p.wait()
 
     def startButtonClicked(self):
-        import os
         items = self.vmTable.selectedItems()
         if len(items) > 0:
             name = items[0].text()
             if name not in self.runningVM.keys():
                 desc,path = self.datadict['VMList'][name]
                 if '86BoxPath' in self.datadict.keys():
-                    import subprocess
                     ops = []
                     ops.append(self.datadict['86BoxPath'])
                     if 'RomOverride' in self.datadict.keys():

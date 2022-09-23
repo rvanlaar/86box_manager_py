@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
-from mainw import MainWin
-from PyQt5 import QtCore, QtGui, QtWidgets
-from util import loadOrNew
 import sys
+
+from PyQt5 import QtWidgets
+
+from src.mainw import MainWin
+from src.util import loadOrNew
+
 # Windows home + "AppData\Local\86BoxManPy\"
 # Linux home + ".config/86BoxManPy/"
 # Mac home + "Library/Application Support/86BoxManPy/86BoxManPy/"

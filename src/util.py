@@ -1,4 +1,7 @@
 import json
+import platform
+from os import mkdir, path
+from pathlib import Path
 
 
 def createV1Config():
@@ -19,9 +22,7 @@ def createConfig():
 
 
 def genConfPath():
-    from pathlib import Path
-    from os import path
-    import platform
+
     home = str(Path.home())
     if platform.system() == "Linux":
         return path.join(home,'.config/86BoxManPy/')
@@ -35,9 +36,7 @@ def saveConfig(config):
         json.dump(config, handle)
 
 def loadOrNew():
-    from os import path
-    import sys
-    from os import mkdir
+
     config_path = genConfPath()
     config_file = path.join(config_path, 'config.json')
     if not path.exists(config_path):
