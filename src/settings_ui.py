@@ -102,12 +102,25 @@ class Ui_settingsWindow(object):
         self.label_4.setText(_translate("settingsWindow", "Path to VMs:"))
         self.label_5.setText(_translate("settingsWindow", "Rom Path:"))
         self.romCheck.setText(_translate("settingsWindow", "Override default rom path"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.generalTab), _translate("settingsWindow", "General"))
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.generalTab),
+            _translate("settingsWindow", "General"),
+        )
         self.checkBox.setText(_translate("settingsWindow", "Enable Logging to file"))
         self.logBrowse.setText(_translate("settingsWindow", "Browse"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.advancedTab), _translate("settingsWindow", "Advanced"))
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.advancedTab),
+            _translate("settingsWindow", "Advanced"),
+        )
         self.label.setText(_translate("settingsWindow", "86Box Manager Lite"))
-        self.label_2.setText(_translate("settingsWindow", "<html><head/><body><p>A config manager for 86Box<br/><br/>Version 0.0.1<br/><br/>Copyright 2022 Malcolm Haak</p><p>Licenced under the &lt;insert licence here&gt;</p></body></html>"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.aboutTab), _translate("settingsWindow", "About"))
+        self.label_2.setText(
+            _translate(
+                "settingsWindow",
+                "<html><head/><body><p>A config manager for 86Box<br/><br/>Version 0.0.1<br/><br/>Copyright 2022 Malcolm Haak</p><p>Licenced under the &lt;insert licence here&gt;</p></body></html>",
+            )
+        )
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.aboutTab), _translate("settingsWindow", "About")
+        )
         self.settingsOK.setText(_translate("settingsWindow", "Ok"))
         self.settingsCancel.setText(_translate("settingsWindow", "Cancel"))

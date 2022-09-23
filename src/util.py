@@ -5,6 +5,7 @@ from pathlib import Path
 
 from PyQt5 import QtWidgets
 
+
 def createV1Config():
     v1 = {}
     v1["ConfigVersion"] = 1
@@ -18,6 +19,7 @@ def createV1Config():
     v1["LogPath"] = ""
     return v1
 
+
 def createConfig():
     return createV1Config()
 
@@ -25,21 +27,24 @@ def createConfig():
 def genConfPath():
 
     home = str(Path.home())
+
     if platform.system() == "Linux":
-        return path.join(home,'.config/86BoxManPy/')
+        return path.join(home, ".config/86BoxManPy/")
     elif platform.system() == "Windows":
-        return path.join(home, 'AppData\\Local\\86BoxManPy\\')
+        return path.join(home, "AppData\\Local\\86BoxManPy\\")
     elif platform.system() == "Darwin":
-        return path.join(home, 'Library/Application Support/86BoxManPy/')
+        return path.join(home, "Library/Application Support/86BoxManPy/")
+
 
 def saveConfig(config):
-    with open(config['ConfigPath'], 'w') as handle:
+    with open(config["ConfigPath"], "w") as handle:
         json.dump(config, handle)
+
 
 def loadOrNew():
 
     config_path = genConfPath()
-    config_file = path.join(config_path, 'config.json')
+    config_file = path.join(config_path, "config.json")
     if not path.exists(config_path):
         mkdir(config_path)
     if path.exists(config_file):
@@ -60,7 +65,7 @@ def loadOrNew():
     return datadict
 
 
-def errorBox(self,window,title,message):
+def errorBox(self, window, title, message):
     dlg = QtWidgets.QMessageBox(window)
     dlg.setWindowTitle(title)
     dlg.setText(message)

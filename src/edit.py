@@ -15,7 +15,7 @@ class editVMiW(Ui_editVM):
         self.changed = False
         self.window = editVM
         self.vmName.setText(name)
-        (description, path) = self.datadict['VMList'][name]
+        (description, path) = self.datadict["VMList"][name]
         self.vmname = name
         self.vmDescription.setText(description)
         self.vmPath.setText(path)
@@ -33,29 +33,29 @@ class editVMiW(Ui_editVM):
             newName = self.vmName.text()
             newDesc = self.vmDescription.text()
             newPath = self.vmPath.text()
-            if not(self.vmname in self.runningVM.keys()):
-                if self.vmname in self.datadict['VMList'].keys():
-                    nope,nope1 = self.datadict['VMList'].pop(self.vmname)
+            if not (self.vmname in self.runningVM.keys()):
+                if self.vmname in self.datadict["VMList"].keys():
+                    nope, nope1 = self.datadict["VMList"].pop(self.vmname)
                 if os.path.exists(newPath):
-                    self.datadict['VMList'][newName] = (newDesc, newPath)
+                    self.datadict["VMList"][newName] = (newDesc, newPath)
                     saveConfig(self.datadict)
                     if self.configureCheck.isChecked():
-                        if '86BoxPath' in self.datadict.keys():
+                        if "86BoxPath" in self.datadict.keys():
                             ops = []
-                            ops.append(self.datadict['86BoxPath'])
-                            if 'RomOverride' in self.datadict.keys():
-                                if self.datadict['RomOverride']:
-                                    ops.append('-R')
-                                    ops.append(self.datadict['RomPath'])
-                            ops.append('-P')
+                            ops.append(self.datadict["86BoxPath"])
+                            if "RomOverride" in self.datadict.keys():
+                                if self.datadict["RomOverride"]:
+                                    ops.append("-R")
+                                    ops.append(self.datadict["RomPath"])
+                            ops.append("-P")
                             ops.append(newPath)
-                            ops.append('-V')
+                            ops.append("-V")
                             ops.append(newName)
-                            ops.append('-S')
+                            ops.append("-S")
                             p = subprocess.Popen(ops)
                             p.wait()
                     if self.startVMcheck.checkState():
-                        self.datadict['RunVM'] = newName
+                        self.datadict["RunVM"] = newName
                 else:
                     errorBox(self, self.window, "Error", "Path doesn't exist.")
             else:
