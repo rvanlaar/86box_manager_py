@@ -3,6 +3,7 @@ import platform
 from os import mkdir, path
 from pathlib import Path
 
+from PyQt5 import QtWidgets
 
 def createV1Config():
     v1 = {}

@@ -48,7 +48,7 @@ class editVMiW(Ui_editVM):
                                     ops.append('-R')
                                     ops.append(self.datadict['RomPath'])
                             ops.append('-P')
-                            ops.append(path)
+                            ops.append(newPath)
                             ops.append('-V')
                             ops.append(newName)
                             ops.append('-S')
