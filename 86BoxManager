@@ -2,7 +2,7 @@
 
 import sys
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 from src.mainw import MainWin
 from src.util import loadOrNew
@@ -12,8 +12,11 @@ from src.util import loadOrNew
 # Mac home + "Library/Application Support/86BoxManPy/86BoxManPy/"
 
 if __name__ == "__main__":
-    datadict = loadOrNew()
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
     app = QtWidgets.QApplication(sys.argv)
+
+    datadict = loadOrNew()
     MainWindow = QtWidgets.QMainWindow()
     MainWindow.ui = MainWin()
     MainWindow.ui.setupWin(MainWindow, datadict)
